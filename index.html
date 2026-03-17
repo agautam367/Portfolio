@@ -341,7 +341,37 @@
       font-size: 0.9rem;
       text-shadow: 1px 1px 0 var(--pink-dark);
     }
+    .contact-form {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
 
+.contact-form input,
+.contact-form textarea {
+  width: 100%;
+  padding: 12px;
+  border: 3px solid var(--brown);
+  background: #fff8fc;
+  color: var(--text);
+  font-family: inherit;
+  font-size: 0.95rem;
+  outline: none;
+}
+
+.contact-form textarea {
+  resize: vertical;
+}
+
+#formStatus {
+  margin-top: 8px;
+  font-weight: bold;
+  text-align: center;
+}
     @media (max-width: 768px) {
       .hero h2 {
         font-size: 1.9rem;
@@ -395,6 +425,7 @@
       .hero-buttons {
         flex-direction: column;
       }
+
     }
   </style>
 </head>
@@ -484,19 +515,21 @@ I’m particularly interested in working on large-scale systems at the intersect
 
       <div class="card pixel-box">
         <div class="card-icon">🌸</div>
-        <h3>Frontend Experiences</h3>
+        <h3>Backend Experiences</h3>
         <p>
-          Designed and built UI experiences that feel smooth, thoughtful, and a little
+          Designed and built scalable backends that handle high traffic, maintains idempotency and follows CAP
           extra cute without losing usability.
         </p>
         <div class="tag-row">
-          <span class="tag">Frontend</span>
-          <span class="tag">HTML/CSS</span>
-          <span class="tag">Design</span>
+          <span class="tag">Redis</span>
+          <span class="tag">Kafka</span>
+          <span class="tag">System Design</span>
         </div>
       </div>
     </div>
   </section>
+
+
 
   <section id="contact" class="content-section">
     <h2 class="section-title">Contact</h2>
@@ -505,7 +538,13 @@ I’m particularly interested in working on large-scale systems at the intersect
       <p>
         Want to collaborate, chat tech, or build something cool together?
       </p>
-
+        <form id="contactForm" class="contact-form">
+      <input type="text" id="name" name="name" placeholder="Your name" required />
+      <input type="email" id="email" name="email" placeholder="Your email" required />
+      <textarea id="message" name="message" placeholder="Your message" rows="5" required></textarea>
+      <button type="submit" class="btn btn-primary">Send Message</button>
+      <p id="formStatus"></p>
+    </form>
       <div class="contact-links">
         <a href="mailto:aarushgautam82@gmail.com">Email Me</a>
         <a href="https://linkedin.com/in/aarushi-gautam" target="_blank">LinkedIn</a>
@@ -520,3 +559,41 @@ I’m particularly interested in working on large-scale systems at the intersect
 
 </body>
 </html>
+<script>
+  const form = document.getElementById("contactForm");
+  const statusText = document.getElementById("formStatus");
+
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    const formData = {
+      name: document.getElementById("name").value.trim(),
+      email: document.getElementById("email").value.trim(),
+      message: document.getElementById("message").value.trim(),
+    };
+
+    statusText.textContent = "Sending...";
+
+    try {
+      const res = await fetch("https://your-railway-backend.up.railway.app/api/messages", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(formData)
+      });
+
+      const data = await res.json();
+
+      if (res.ok) {
+        statusText.textContent = "Message sent successfully 💖";
+        form.reset();
+      } else {
+        statusText.textContent = data.error || "Something went wrong.";
+      }
+    } catch (err) {
+      statusText.textContent = "Server error. Please try again later.";
+      console.error(err);
+    }
+  });
+</script>
