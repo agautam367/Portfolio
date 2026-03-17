@@ -575,7 +575,7 @@ I’m particularly interested in working on large-scale systems at the intersect
     statusText.textContent = "Sending...";
 
     try {
-      const res = await fetch("fastapi-service-production-b6a2.up.railway.app/api/messages", {
+      const res = await fetch("https://fastapi-service-production-b6a2.up.railway.app/api/messages", {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
