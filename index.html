@@ -589,7 +589,7 @@ I’m particularly interested in working on large-scale systems at the intersect
         statusText.textContent = "Message sent successfully 💖";
         form.reset();
       } else {
-        statusText.textContent = data.error || "Something went wrong.";
+         statusText.textContent = data.detail || data.error || "Something went wrong.";
       }
     } catch (err) {
       statusText.textContent = "Server error. Please try again later.";
