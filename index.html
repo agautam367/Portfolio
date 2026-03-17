@@ -3,109 +3,397 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
   <title>Aarushi | Portfolio</title>
 
   <style>
+    :root {
+      --bg: #ffdff1;
+      --bg2: #ffeefe;
+      --grass: #b8f2c8;
+      --pink: #ff8fc7;
+      --pink-dark: #e25aa4;
+      --lavender: #d8b4ff;
+      --cream: #fff8fc;
+      --text: #4a2b43;
+      --brown: #7a4b5d;
+      --shadow: #a85c87;
+      --white: #ffffff;
+    }
+
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
-      font-family: Arial, sans-serif;
+    }
+
+    html {
+      scroll-behavior: smooth;
     }
 
     body {
+      font-family: "Press Start 2P", monospace;
       line-height: 1.6;
-      color: #333;
-      background: #f9f9f9;
+      color: var(--text);
+      background:
+        linear-gradient(to bottom, #ffcfe8 0%, #ffdff1 35%, #ffeefe 100%);
+      image-rendering: pixelated;
     }
 
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    /* Minecraft-ish blocky look */
+    .pixel-box {
+      background: var(--cream);
+      border: 4px solid var(--brown);
+      box-shadow: 8px 8px 0 var(--shadow);
+      border-radius: 0;
+    }
+
+    /* Header */
     header {
-      background: #111;
-      color: #fff;
-      padding: 20px 40px;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: #ffb7dc;
+      border-bottom: 4px solid var(--brown);
+      box-shadow: 0 6px 0 #d97ab1;
+    }
+
+    .header-inner {
+      max-width: 1100px;
+      margin: auto;
+      padding: 18px 20px;
       display: flex;
       justify-content: space-between;
       align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
     }
 
     header h1 {
-      font-size: 20px;
+      font-size: 1.3rem;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--white);
+      text-shadow: 2px 2px 0 var(--pink-dark);
+    }
+
+    nav {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
     }
 
     nav a {
-      color: #fff;
-      margin-left: 20px;
-      text-decoration: none;
-      font-size: 14px;
+      padding: 8px 14px;
+      background: var(--cream);
+      border: 3px solid var(--brown);
+      box-shadow: 4px 4px 0 #d685b3;
+      font-size: 0.85rem;
+      font-weight: bold;
+      text-transform: uppercase;
+      transition: transform 0.15s ease;
     }
 
+    nav a:hover {
+      transform: translate(-2px, -2px);
+    }
+
+    /* Hero */
     .hero {
-      height: 90vh;
+      min-height: 92vh;
       display: flex;
-      flex-direction: column;
-      justify-content: center;
       align-items: center;
-      background: linear-gradient(135deg, #6a11cb, #2575fc);
-      color: white;
+      justify-content: center;
+      padding: 50px 20px;
+      position: relative;
+      overflow: hidden;
+      background:
+        linear-gradient(to bottom, #f7b6dd 0%, #fcd6eb 45%, #c9f6d8 46%, #b9efcb 100%);
+    }
+
+    /* Pixel clouds */
+    .hero::before,
+    .hero::after {
+      content: "";
+      position: absolute;
+      background: white;
+      opacity: 0.9;
+      image-rendering: pixelated;
+    }
+
+    .hero::before {
+      width: 120px;
+      height: 36px;
+      top: 80px;
+      left: 8%;
+      box-shadow:
+        24px 0 0 white,
+        48px 0 0 white,
+        12px -12px 0 white,
+        36px -12px 0 white,
+        60px -12px 0 white,
+        24px 12px 0 white,
+        48px 12px 0 white;
+    }
+
+    .hero::after {
+      width: 96px;
+      height: 30px;
+      top: 140px;
+      right: 12%;
+      box-shadow:
+        20px 0 0 white,
+        40px 0 0 white,
+        10px -10px 0 white,
+        30px -10px 0 white,
+        20px 10px 0 white;
+    }
+
+    .hero-card {
+      max-width: 760px;
+      width: 100%;
       text-align: center;
-      padding: 20px;
+      padding: 36px 24px;
+      background: rgba(255, 248, 252, 0.96);
+      border: 4px solid var(--brown);
+      box-shadow: 10px 10px 0 var(--shadow);
+      position: relative;
+      z-index: 2;
+    }
+
+    .badge {
+      display: inline-block;
+      margin-bottom: 16px;
+      padding: 8px 14px;
+      background: var(--lavender);
+      border: 3px solid var(--brown);
+      box-shadow: 4px 4px 0 #b07ddd;
+      font-size: 0.8rem;
+      font-weight: bold;
+      text-transform: uppercase;
     }
 
     .hero h2 {
-      font-size: 40px;
-      margin-bottom: 10px;
+      font-size: 2.5rem;
+      margin-bottom: 14px;
+      color: var(--pink-dark);
+      text-shadow: 2px 2px 0 #ffd4ec;
     }
 
     .hero p {
-      font-size: 18px;
-      max-width: 600px;
+      max-width: 620px;
+      margin: 0 auto;
+      font-size: 1rem;
+    }
+
+    .hero-buttons {
+      margin-top: 24px;
+      display: flex;
+      justify-content: center;
+      gap: 14px;
+      flex-wrap: wrap;
     }
 
     .btn {
-      margin-top: 20px;
-      padding: 10px 20px;
-      background: white;
-      color: #2575fc;
-      border-radius: 5px;
-      text-decoration: none;
+      display: inline-block;
+      padding: 12px 20px;
       font-weight: bold;
+      text-transform: uppercase;
+      font-size: 0.9rem;
+      border: 3px solid var(--brown);
+      box-shadow: 5px 5px 0 var(--shadow);
+      transition: transform 0.15s ease;
     }
 
-    section {
-      padding: 60px 40px;
-      max-width: 1000px;
-      margin: auto;
+    .btn:hover {
+      transform: translate(-2px, -2px);
     }
 
-    .section-title {
-      font-size: 28px;
-      margin-bottom: 20px;
-      text-align: center;
-    }
-
-    .projects {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 20px;
-    }
-
-    .card {
-      background: white;
-      padding: 20px;
-      border-radius: 10px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-    }
-
-    footer {
-      text-align: center;
-      padding: 20px;
-      background: #111;
+    .btn-primary {
+      background: var(--pink);
       color: white;
     }
 
-    @media(max-width: 600px) {
+    .btn-secondary {
+      background: var(--grass);
+      color: var(--text);
+    }
+
+    /* Sections */
+    section.content-section {
+      max-width: 1100px;
+      margin: auto;
+      padding: 70px 20px;
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 28px;
+      font-size: 2rem;
+      color: var(--pink-dark);
+      text-transform: uppercase;
+      text-shadow: 2px 2px 0 #ffe3f2;
+    }
+
+    .section-subtitle {
+      text-align: center;
+      max-width: 720px;
+      margin: 0 auto 32px;
+      font-size: 0.95rem;
+    }
+
+    /* About */
+    .about-box {
+      padding: 28px;
+    }
+
+    .about-box p {
+      text-align: center;
+      max-width: 760px;
+      margin: auto;
+    }
+
+    /* Projects */
+    .projects {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 22px;
+    }
+
+    .card {
+      padding: 22px;
+      transition: transform 0.15s ease;
+    }
+
+    .card:hover {
+      transform: translate(-4px, -4px);
+    }
+
+    .card-icon {
+      font-size: 1.8rem;
+      margin-bottom: 10px;
+    }
+
+    .card h3 {
+      margin-bottom: 10px;
+      color: var(--pink-dark);
+      text-transform: uppercase;
+      font-size: 1rem;
+    }
+
+    .card p {
+      font-size: 0.92rem;
+    }
+
+    .tag-row {
+      margin-top: 14px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .tag {
+      font-size: 0.75rem;
+      padding: 6px 10px;
+      background: #ffe1f1;
+      border: 2px solid var(--brown);
+      font-weight: bold;
+    }
+
+    /* Contact */
+    .contact-box {
+      padding: 28px;
+      text-align: center;
+    }
+
+    .contact-links {
+      margin-top: 18px;
+      display: flex;
+      justify-content: center;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .contact-links a {
+      padding: 10px 16px;
+      background: var(--lavender);
+      border: 3px solid var(--brown);
+      box-shadow: 4px 4px 0 #b07ddd;
+      font-weight: bold;
+      font-size: 0.85rem;
+    }
+
+    footer {
+      margin-top: 30px;
+      padding: 22px 20px;
+      text-align: center;
+      background: #ffb7dc;
+      color: white;
+      border-top: 4px solid var(--brown);
+      box-shadow: 0 -6px 0 #d97ab1;
+      font-size: 0.9rem;
+      text-shadow: 1px 1px 0 var(--pink-dark);
+    }
+
+    @media (max-width: 768px) {
       .hero h2 {
-        font-size: 28px;
+        font-size: 1.9rem;
+      }
+
+      .section-title {
+        font-size: 1.5rem;
+      }
+
+      nav {
+        justify-content: center;
+      }
+
+      .hero-card {
+        padding: 28px 18px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      header h1 {
+        width: 100%;
+        text-align: center;
+      }
+
+      .header-inner {
+        justify-content: center;
+      }
+
+      .hero {
+        padding-top: 40px;
+      }
+
+      .hero h2 {
+        font-size: 1.55rem;
+      }
+
+      .hero p,
+      .section-subtitle,
+      .about-box p,
+      .card p {
+        font-size: 0.9rem;
+      }
+
+      .btn,
+      nav a,
+      .contact-links a {
+        width: 100%;
+        text-align: center;
+      }
+
+      .hero-buttons {
+        flex-direction: column;
       }
     }
   </style>
@@ -113,67 +401,118 @@
 
 <body>
 
-  <!-- Header -->
   <header>
-    <h1>Aarushi</h1>
-    <nav>
-      <a href="#about">About</a>
-      <a href="#projects">Projects</a>
-      <a href="#contact">Contact</a>
-    </nav>
+    <div class="header-inner">
+      <h1>🎀 Aarushi.exe</h1>
+      <nav>
+        <a href="#about">About</a>
+        <a href="#projects">Builds</a>
+        <a href="#contact">Ping Me</a>
+      </nav>
+    </div>
   </header>
 
-  <!-- Hero -->
   <section class="hero">
-    <h2>Hi, I'm Aarushi 👋</h2>
-    <p>
-      Software Engineer passionate about building scalable systems, AI solutions, and clean user experiences.
-    </p>
-    <a href="#projects" class="btn">View My Work</a>
-  </section>
+    <div class="hero-card">
+      <div class="badge">Minecraft Pink Tech Mode</div>
+      <h2>Hi, I'm Aarushi 👾💖</h2>
+      <p>
+        Software engineer building scalable systems, AI solutions, and cute clean experiences
+        with big builder energy and pink gamer-girlie vibes.
+      </p>
 
-  <!-- About -->
-  <section id="about">
-    <h2 class="section-title">About Me</h2>
-    <p style="text-align:center; max-width:700px; margin:auto;">
-      I’m a developer with experience in building web applications, working with cloud platforms like Azure,
-      and exploring AI/ML solutions. I enjoy solving real-world problems and creating impactful products.
-    </p>
-  </section>
-
-  <!-- Projects -->
-  <section id="projects">
-    <h2 class="section-title">Projects</h2>
-    <div class="projects">
-      <div class="card">
-        <h3>Project One</h3>
-        <p>Short description of your project.</p>
-      </div>
-
-      <div class="card">
-        <h3>Project Two</h3>
-        <p>Short description of your project.</p>
-      </div>
-
-      <div class="card">
-        <h3>Project Three</h3>
-        <p>Short description of your project.</p>
+      <div class="hero-buttons">
+        <a href="#projects" class="btn btn-primary">View My Builds</a>
+        <a href="#contact" class="btn btn-secondary">Let's Connect</a>
       </div>
     </div>
   </section>
 
-  <!-- Contact -->
-  <section id="contact">
-    <h2 class="section-title">Contact</h2>
-    <p style="text-align:center;">
-      Email: your@email.com <br/>
-      LinkedIn: linkedin.com/in/yourprofile
+  <section id="about" class="content-section">
+    <h2 class="section-title">About Me</h2>
+    <p class="section-subtitle">
+      A little bit coder, a little bit builder, a little bit pink chaos.
     </p>
+
+    <div class="about-box pixel-box">
+      <p>
+        I’m a developer with experience building web applications, working with cloud platforms
+        like Azure, and exploring AI/ML solutions. I enjoy solving real-world problems, shipping
+        polished products, and turning technical ideas into things people actually love using.
+      </p>
+    </div>
   </section>
 
-  <!-- Footer -->
+  <section id="projects" class="content-section">
+    <h2 class="section-title">Featured Builds</h2>
+    <p class="section-subtitle">
+      My little portfolio inventory: projects, experiments, and shiny things I’ve made.
+    </p>
+
+    <div class="projects">
+      <div class="card pixel-box">
+        <div class="card-icon">💻</div>
+        <h3>AI Assistant Project</h3>
+        <p>
+          Built an AI-powered experience focused on useful automation, better workflows,
+          and clean interaction design.
+        </p>
+        <div class="tag-row">
+          <span class="tag">AI</span>
+          <span class="tag">Python</span>
+          <span class="tag">Automation</span>
+        </div>
+      </div>
+
+      <div class="card pixel-box">
+        <div class="card-icon">☁️</div>
+        <h3>Cloud + Azure Work + GCP</h3>
+        <p>
+          Worked with cloud tooling and deployment patterns to support scalable,
+          reliable systems and production workflows.
+        </p>
+        <div class="tag-row">
+          <span class="tag">Azure</span>
+          <span class="tag">GCP</span>
+          <span class="tag">Cloud</span>
+          <span class="tag">Infra</span>
+        </div>
+      </div>
+
+      <div class="card pixel-box">
+        <div class="card-icon">🌸</div>
+        <h3>Frontend Experiences</h3>
+        <p>
+          Designed and built UI experiences that feel smooth, thoughtful, and a little
+          extra cute without losing usability.
+        </p>
+        <div class="tag-row">
+          <span class="tag">Frontend</span>
+          <span class="tag">HTML/CSS</span>
+          <span class="tag">Design</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="content-section">
+    <h2 class="section-title">Contact</h2>
+
+    <div class="contact-box pixel-box">
+      <p>
+        Want to collaborate, chat tech, or build something cool together?
+      </p>
+
+      <div class="contact-links">
+        <a href="mailto:aarushgautam82@gmail.com">Email Me</a>
+        <a href="https://linkedin.com/in/aarushi-gautam" target="_blank">LinkedIn</a>
+        <a href="https://github.com/agautam367">GitHub</a>
+      </div>
+    </div>
+  </section>
+
   <footer>
-    <p>© 2026 Aarushi. Built with ❤️</p>
+    <p>© 2026 Aarushi. Built with pixels, pink, and main-character energy ✨</p>
   </footer>
 
 </body>
